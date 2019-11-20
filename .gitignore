@@ -33,7 +33,7 @@ Temporary Items
 
 ### VisualStudioCode ###
 .vscode/
-#!.vscode/settings.json
+!.vscode/settings.json
 #!.vscode/tasks.json
 #!.vscode/launch.json
 #!.vscode/extensions.json
@@ -46,3 +46,6 @@ Temporary Items
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
+# 一些运行文件
+main
+main.dSYM/
