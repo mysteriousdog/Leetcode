@@ -6,6 +6,7 @@
 #include<stack>
 #include<vector>
 #include<string>
+#include<algorithm>
 #include<map>
 
 
@@ -108,7 +109,7 @@ public:
 */
 /*********************************************************************************************************************/
 /*17. 电话号码的字母组合*/
-
+/*
 class Solution {
 
 private:
@@ -166,11 +167,105 @@ public:
         cout<<endl;
     }
 };
+*/
+
 
 /*********************************************************************************************************************/
 
+/*15. 三数之和
+*时间复杂度是n3，太慢了，考虑双指针法
+*/
+/*
+class Solution {
+public:
+    vector<vector<int> > threeSum(vector<int>& nums) {
+        
+        vector<vector<int> > vec;
+        if(nums.size() <3){return vec;}
+        sort(nums.begin(),nums.end());
+        int len = nums.size();
+        for (size_t i = 0; i < len-2; i++)
+        {
+            int numi = nums[i];
+            if(i !=0 && numi == nums[i-1])continue;
+            //如果当前的num与前一个num相同，则直接跳过
+            for (size_t j = i+1; j < len-1; j++)
+            {
+                if(j != i+1 && nums[j] == nums[j-1]){continue;}
+                for (size_t k = j+1; k < len; k++)
+                {
+                    if(nums[j] + nums[k] == -numi)
+                    {
+                        vector<int> v;
+                        v.push_back(numi);
+                        v.push_back(nums[j]);
+                        v.push_back(nums[k]);
+                        vec.push_back(v);
+                        break;
+                    }
+                    if(nums[j] + nums[i] > -numi){break;}
+                }
+                
+            }
+            
+        }
+        return vec;
+        
+    }
+};
+*/
 /*********************************************************************************************************************/
 
+
+
+/*********************************************************************************************************************/
+
+/*15. 三数之和
+*双指针法,时间复杂度n2
+*/
+class Solution {
+public:
+    vector<vector<int> > threeSum(vector<int>& nums) {
+        vector<vector<int> > vec;
+        if(nums.size() <3){return vec;}
+        sort(nums.begin(),nums.end());
+        int len = nums.size(),low,high=len-1;
+        for (size_t i = 0; i < len-2; i++)
+        {
+            int numi = nums[i];
+            if(i !=0 && numi == nums[i-1])continue;
+            //如果当前的num与前一个num相同，则直接跳过
+            low = i+1;
+            high = len-1;
+            while(low<high){
+                if(nums[low] + nums[high] == -numi){
+                    vector<int> v;
+                    v.push_back(numi);
+                    v.push_back(nums[low]);
+                    v.push_back(nums[high]);
+
+                    //vec.push_back({numi,nums[low],nums[high]});
+                    vec.push_back(v);
+                    while(nums[high] == nums[--high] && high > low){}
+                }
+                else if(nums[low] + nums[high] > -numi){
+                    while(nums[high] == nums[--high] && high > low){}
+                }
+                else{
+                    while(nums[low] == nums[++low] && high > low){}
+                }
+
+            }
+            
+        }
+        return vec;
+
+    }
+};
+
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
 
