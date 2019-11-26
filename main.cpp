@@ -1,4 +1,5 @@
 
+
 #include"base.h"
 #include"struct.h"
 #include"class.h"
@@ -27,10 +28,10 @@ int main(){
     for (size_t i = 0; i < v.size(); i++)
     {
         vec = v[i];
-        /* code */
+        
         for (size_t j = 0; j < vec.size(); j++)
         {
-            /* code */
+            
             cout<<vec[j]<<" ";
         }
         cout<<endl;
