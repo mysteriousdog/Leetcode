@@ -271,8 +271,47 @@ public:
 class Solution {
 public:
     string convert(string s, int numRows) {
+        int len = s.length(),slen = numRows*2-2;
+        char *cs = new char[len];
+        //char *cs = (char*)malloc(sizeof(char)*len);
+        for (size_t i = 0; i < len;)
+        {
+            cout<<"istart-->"<<i<<endl;
+            cs[i] = s[i];
+            cout<<"char-->"<<cs[i]<<endl;
+            int j = i+1,send = i + slen-1,jlen = send+1;
+            cout<<"send-->"<<send<<endl;
+            
+            i++;
+            if (jlen > len)
+            {
+                jlen = len;
+            }cout<<"jlen-->"<<jlen<<endl;
+            
+            for(;j<jlen;j++){
+                cs[j] = s[i++];
+                cout<<"char-->"<<cs[j]<<endl;
+                if(send < jlen && j+1 < jlen){
+                    cs[++j] = s[send--];
+                    cout<<"char-->"<<cs[j]<<endl;
+                }
+            }
+            cs[j] = s[i++];
+            //i = j;
+            i++;
+            cout<<"iend--->"<<i<<endl;
+        }
+        int k = 0;
+        for (size_t i = 0; i < slen; i++)
+        {
+            for(int j = i;j<len;j+=slen){
+                s[k++] = cs[j];
+            }
+        }
+        return s;
         
     }
+        
 };
 
 /*********************************************************************************************************************/
