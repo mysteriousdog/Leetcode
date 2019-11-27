@@ -18,6 +18,7 @@ struct ListNode{
         next = NULL;
     }
 };
+
 #endif
 
 

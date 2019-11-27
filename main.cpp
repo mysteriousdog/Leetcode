@@ -12,10 +12,18 @@
 int main(){
 
   Solution *s = new Solution();
-  vector<string> v = s->generateParenthesis(4);
-  for (size_t i = 0; i < v.size(); i++)
-  {
-    cout<<v[i]<<endl;
-  }
+  ListNode *head = new ListNode(1);
+  ListNode *head1 = new ListNode(2);
+  ListNode *head2 = new ListNode(3);
+  //ListNode *head3 = new ListNode(4);
+  head->next = head1;
+  head1->next = head2;
+  //head2->next = head3;
+  cout<<"start-->"<<" ";
+  s->showList(head);
+  ListNode * p = s->swapPairs(head);
+  cout<<"final-->"<<" ";
+  s->showList(p);
+
   
 }

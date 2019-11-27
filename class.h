@@ -318,7 +318,7 @@ public:
 
 /*********************************************************************************************************************/
 /*22. 括号生成*/
-
+/*
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
@@ -393,7 +393,53 @@ public:
         cout<<endl;
     }
 };
+*/
 /*********************************************************************************************************************/
+/*24. 两两交换链表中的节点*/
+/*
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* p1=head,*p2 = head,*p;
+        ListNode* p0 = new ListNode(-1);
+        p0->next = p1;
+        if(head == NULL || head->next == NULL){return head;}
+        p2 = head->next;
+        head = p0;
+        while(p2 != NULL){
+            swapNode(p0,p1,p2);
+            p = p1;
+            p1 = p2;
+            p2 = p;
+            if(p2->next != NULL && p2->next->next != NULL){
+                p2 = p2->next->next;
+                p1 = p1->next->next;
+                p0 = p0->next->next;
+            }
+            else{
+                return head->next;
+            }
+        }
+        return head->next;
+    }
+    void showList(ListNode* head){
+        while(head!=NULL){
+            cout<<head->val<<" ";
+            head = head->next;
+        }
+        cout<<endl;
+    }
+    void swapNode(ListNode* p0,ListNode* p1,ListNode *p2){
+        p0->next = p2;
+        p1->next = p2->next;
+        p2->next = p1;
+    }
+};
+
+*/
 /*********************************************************************************************************************/
 
 
+/*********************************************************************************************************************/
+
+/*********************************************************************************************************************/
