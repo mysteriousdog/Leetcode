@@ -12,7 +12,10 @@
 int main(){
 
   Solution *s = new Solution();
-  string str = "LEETCODEISHIRING";
-  string ss = s->convert(str,4);
-  cout<<ss<<endl;
+  vector<string> v = s->generateParenthesis(4);
+  for (size_t i = 0; i < v.size(); i++)
+  {
+    cout<<v[i]<<endl;
+  }
+  
 }

@@ -8,7 +8,8 @@
 #include<string>
 #include<algorithm>
 #include<map>
-
+#include<queue>
+#include<set>
 
 #endif
 /*********************************************************************************************************************/
@@ -267,7 +268,7 @@ public:
 /*********************************************************************************************************************/
 
 /*6. Z 字形变换*/
-
+/*
 class Solution {
 public:
     string convert(string s, int numRows) {
@@ -313,8 +314,85 @@ public:
     }
         
 };
+*/
 
 /*********************************************************************************************************************/
+/*22. 括号生成*/
+
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        set<string> s;
+        set<string>::iterator it;
+        vector<vector<string>> vec;
+        vector<string> v;
+        if(n<1){return v;}
+        v.push_back("()");
+        if(n == 1){return v;}
+        vec.push_back(v);
+        for(int i = 1;i<n;i++){
+            s.clear();
+            vector<string> vv;
+           // cout<<vec.size()<<endl;
+            s = genone(vec[i-1],s);
+           // showSet(s);
+            int b = 2,m = i-b + 1;
+            while(m >= b){
+                s = gentwo(vec[m-1],vec[b-1],s);
+            //    showSet(s);
+                b++;
+                m--;
+            }
+            for(it = s.begin();it != s.end();it++){
+                vv.push_back(*it);
+            }
+            vec.push_back(vv);
+        }
+
+        return vec[n-1];
+        
+    }
+    set<string> gentwo(vector<string> v1 , vector<string> v2,set<string> s){
+        for (size_t i = 0; i < v1.size(); i++)
+        {
+            for(int j = 0;j<v2.size();j++){
+                string sv1 = v1[i],sv2 = v2[j];
+                string sl = sv2 + sv1,sr = sv1 + sv2;
+                s.insert(sl);
+                s.insert(sr);
+
+            }
+        }
+        return s;
+        
+        
+    }
+    set<string> genone(vector<string> v1,set<string> s){
+       // cout<<"vone--->"<<v1.size()<<endl;
+        for (size_t i = 0; i < v1.size(); i++)
+        {
+            string sv = v1[i];
+            string sl = "()" + sv;
+            string sr = sv + "()";
+            string sw = "(" + sv + ")";
+            s.insert(sw);
+            s.insert(sl);
+            if(sl != sr)s.insert(sr);
+        }
+       // cout<<"sone--->"<<s.size()<<endl;
+        return s;
+        
+    }
+    void showSet(set<string> s){
+        set<string>::iterator it;
+        int slen = s.size();
+        cout<<"slen--->"<<slen<<endl;
+        for(it = s.begin();it!=s.end();it++){
+            cout<<*it<<" ";
+        }
+        cout<<endl;
+    }
+};
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
