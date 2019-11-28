@@ -463,6 +463,7 @@ public:
 /*双指针法的优化，因为两边的高度只取决于最低的那个，设置双指针在头尾，所以在进行更新的时候只能够将短的那个指针向内推移
 *这样才有可能得到更高的height，才嫩有可能突破原来的限制，质疑重复这个操作就可以计算max的值。
 */
+/*
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -481,6 +482,55 @@ public:
         return max;
     }
 };
+*/
+/*********************************************************************************************************************/
+/*34. 在排序数组中查找元素的第一个和最后一个位置
+*线城市简单的二分查找加上遍历，理论上是log(n) + n
+* 并非严格的log(n)
+*/
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int low = 0,high = nums.size()-1,mid = (low+high)/2;
+        while(high >= low){
+            mid = (low+high)/2;
+            if(nums[mid] == target){return getRange(mid,nums,target);}
+            if(nums[mid] > target){high = mid-1;continue;}
+            if(nums[mid] < target){low = mid +1;continue;}
+        }
+        vector<int> vec;
+        vec.push_back(-1);
+        vec.push_back(-1);
+        return vec;
+
+    }
+    vector<int> getRange(int index,vector<int> nums,int target){
+        int len = nums.size(),low = index-1,high = index +1;
+        while(low >=0){
+            if(nums[low--] != target){low += 2;break;}
+        }
+        if(low<0)low = 0;
+        while(high < len){
+            if(nums[high++] != target){high -= 2;break;}
+        }
+        if(high >= len)high = len-1;
+        vector<int> vec;
+        vec.push_back(low);
+        vec.push_back(high);
+        return vec;
+
+    }
+};
+
+/*********************************************************************************************************************/
+
+
+/*********************************************************************************************************************/
+
+/*********************************************************************************************************************/
+
+
 /*********************************************************************************************************************/
 
 /*********************************************************************************************************************/

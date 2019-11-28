@@ -12,12 +12,11 @@
 int main(){
 
   Solution *s = new Solution();
-  int nums[9] = {1,8,6,2,5,4,8,3};
-  vector<int> vec(nums,nums+9);
+  int nums[9] = {5,7,7,8,8,10};
+  vector<int> vec(nums,nums+6);
 
-  //int max = s->maxArea(vec);
-  int max = vec[1];
-  cout<<max<<endl;
+  vec = s->searchRange(vec,10);
+  cout<<vec[0]<<vec[1]<<endl;
   
 
   
