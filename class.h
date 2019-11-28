@@ -488,7 +488,7 @@ public:
 *线城市简单的二分查找加上遍历，理论上是log(n) + n
 * 并非严格的log(n)
 */
-
+/*
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -520,6 +520,60 @@ public:
         vec.push_back(high);
         return vec;
 
+    }
+};
+*/
+
+/*使用了二分查找来查找左右的边界，优化了时间复杂度，虽然在提交中没有呈现，但是在大数据的情况下效率会有所提升*/
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int>vec;
+        int len = nums.size();
+        int mid = binarySearch(nums,target,0,len-1),low,high,lmid,hmid,slow,shigh;
+        if(mid == -1){
+            vec.push_back(-1);
+            vec.push_back(-1);
+            return vec;
+        }
+        low = 0;
+        high = mid-1;
+        while(high >= low){
+            lmid = binarySearch(nums,target,low,high);
+            if(lmid == -1){slow = high+1;break;}
+            high = lmid - 1;
+        }
+        if(high < low){slow = high +1;}
+        vec.push_back(slow);
+        //cout<<vec[0]<<endl;
+        low = mid +1;
+        high = len-1;
+        //cout<<"low->"<<low<<"high->"<<high<<endl;
+        while(high >= low){
+            hmid = binarySearch(nums,target,low,high);
+            if(hmid == -1){shigh= low-1;break;}
+            low = hmid + 1;
+        }
+        if(high < low){shigh = low -1;}
+        vec.push_back(shigh);
+        //cout<<vec[1]<<endl;
+        return vec;
+
+    }
+    int binarySearch(vector<int> nums,int target,int low,int high){
+        int mid,mid_val;
+        while(high >= low){
+            mid = (low + high)/2;
+            mid_val = nums[mid];
+            if(mid_val == target){return mid;}
+            if(mid_val > target){
+                high = mid-1;
+                continue;
+            }
+            low = mid + 1;
+            continue;
+        }
+        return -1;
     }
 };
 
