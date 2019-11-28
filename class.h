@@ -466,7 +466,19 @@ public:
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        
+        auto its = height.begin(),ite = height.end();
+        int max = (ite-its)*(*its > *ite ? *ite : *its),sum;
+        while(ite > its){
+            if( *ite < *its){
+                ite--;
+            }
+            else{
+                its++;
+            }
+            sum = (ite-its)*(*its > *ite ? *ite : *its);
+            if(sum >max)max = sum;
+        }
+        return max;
     }
 };
 /*********************************************************************************************************************/
