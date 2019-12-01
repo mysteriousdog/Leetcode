@@ -438,7 +438,114 @@ public:
 
 */
 /*********************************************************************************************************************/
+/*43. 字符串相乘*/
 
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if(num1 == "0" || num2 == "0")return "0";
+        int zeros_num = 0;
+        vector<string> q;
+        string m1,m2,m3;
+        for (int i = num1.length()-1; i >=0; i--)
+        {
+           // cout<<"i--"<<i<<endl;
+            q.push_back(mulTow(num2,char(num1[i]),zeros_num++));
+        }
+        while(!q.empty()){
+            if(q.size() == 1){return q.front();}
+            m1 = q.back();
+            q.pop_back();
+            m2 = q.back();
+            q.pop_back();
+            m3 = addTow(m1,m2);
+            //cout<<"m1  "<<m1<<"  m2  "<<m2<<"  m3  "<<m3<<endl;
+            q.push_back(m3);
+        }
+        
+    }
+    string mulTow(string num1,char num2,int zeros_num){
+        if(num1 == "0" || num2 == '0')return "0";
+        int rank = 0,m1,m2 = num2 - '0',sum,k;
+        string final_num = "";
+        for (int i = num1.length()-1; i >=0; i--)
+        {
+            m1 = num1[i] - '0';
+            sum = m1*m2 + rank;
+            rank = sum /10;
+            sum = sum%10;
+            final_num += to_string(sum);
+        }
+        if(rank != 0){final_num += to_string(rank);}
+        final_num = myReverse(final_num);
+        for (size_t i = 0; i < zeros_num; i++)
+        {
+            final_num += "0";
+        }
+        return final_num;
+        
+
+    }
+    string addTow(string num1,string num2){
+        num1 = myReverse(num1);
+        num2 = myReverse(num2);
+        string final_num = "";
+        int len1 = num1.length(),len2 = num2.length(),len3;
+        len3 = len1 > len2? len2:len1;
+        int rank = 0,sum,m1,m2,i=0;
+        for (; i < len3; i++)
+        {
+            m1 = num1[i] - '0';
+            m2 = num2[i] - '0';
+            sum = m1 +m2 +rank;
+            rank = sum /10;
+            sum = sum %10;
+            final_num += to_string(sum);
+        }
+        if(len1 == len2){
+            if (rank == 1)
+            {
+                final_num += "1";
+            }
+            
+        }
+
+        if(len1 > len2){
+            for ( ; i < len1; i++)
+            {
+                m1 = num1[i] - '0' + rank;
+                rank = m1/10;
+                m1 %= 10;
+                final_num += to_string(m1);
+            }
+            
+        }
+        else if(len1 < len2){
+            for ( ; i < len2; i++)
+            {
+                m2 = num2[i] - '0' + rank;
+                rank = m2/10;
+                m2 %= 10;
+                final_num += to_string(m2);
+            }
+            
+        }
+        final_num = myReverse(final_num);
+        return final_num;
+        
+        
+    }
+    string myReverse(string str)
+{
+	string res("");
+	for (int i = str.size() - 1; i >= 0; i--)
+	{
+		res += str[i];
+	}
+	return res;
+}
+
+};
 
 /*********************************************************************************************************************/
 
