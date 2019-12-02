@@ -698,5 +698,67 @@ public:
 };
 */
 /*********************************************************************************************************************/
+/*33. 搜索旋转排序数组*/
+/*
+*1：完成基础二分查找代码
+*2:如果未翻转直接进行二分查找,判断是否反转需要对首位数字进行比较，首大于尾反转，否则未反转
+*3：如果进行了反转，需要根据target所属首尾来进行原数组中最小或者最大值的定位，方便得到两个点
+*3.1：利用二分地方法来进行定位查找点
+*4：在两个点中规定一个数组进行二分查找找到target
+*/
+/*
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size(),low = 0,high = len-1,mid_point;
+        if(len <=0){return -1;}
+        if(nums[high] >= nums[low]){return binarySearch(nums,low,high,target);}
+        mid_point = searchPoint(nums,low,high);
+        if(target >= nums[low]){
+            return binarySearch(nums,low,mid_point,target);
+        }
+        return binarySearch(nums,mid_point+1,high,target);
+    }
 
+    int binarySearch(vector<int> nums,int start,int end,int target){
+        //基础测试完毕
+            int mid,mid_val;
+            
+            while(end >= start){
+                mid = (start + end) / 2;
+                mid_val = nums[mid];
+                if(mid_val == target){return mid;}
+                if(mid_val >target ){
+                    end = mid-1;
+                    continue;
+                }
+                start  = mid +1;
+            }
+            return -1;
+}
+    int searchPoint(vector<int> nums,int low,int high){
+        //基础测试完毕
+        int mid,mid_val,min = nums[low];
+        while(high>=low){
+            mid = (low + high) /2;
+            mid_val = nums[mid];
+            if(mid_val >= min){low = mid+1;
+            if(nums[low] < min){return low-1;}
+            continue;}
+            if(mid_val < min){high = mid-1;
+            if(nums[high] > min){return high;}
+            continue;}
+        }
+        return -1;
+    }
+};
+*/
+
+/*********************************************************************************************************************/
+
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
 /*********************************************************************************************************************/

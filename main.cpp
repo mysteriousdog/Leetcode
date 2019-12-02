@@ -13,9 +13,10 @@ int main(){
 
   
   Solution *s = new Solution();
-  string num1 = "6643473430";
-  string num2 = "5493301";
-  string num3 = s->multiply(num1,num2);
-  cout<<num3<<endl;
+  int a[] = {3,1};
+  vector<int> vec(a,a+2);
+  int n = s->search(vec,1);
+  cout<<n<<endl;
+
 }
 
