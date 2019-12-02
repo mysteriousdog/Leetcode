@@ -18,3 +18,4 @@ int main(){
   string num3 = s->multiply(num1,num2);
   cout<<num3<<endl;
 }
+

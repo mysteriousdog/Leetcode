@@ -438,7 +438,157 @@ public:
 
 */
 /*********************************************************************************************************************/
+
+
+/*11. 盛最多水的容器
+*时间复杂度太高，可以使用双指针法来进行优化
+*/
+/*
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int len = height.size(),max = height[1] < height[0] ? height[1]:height[0];
+        for (size_t i = 0; i < len - 1; i++)
+        {
+            for(int j = i+1;j<len;j++){
+                int real_hight,sum;
+                real_hight = height[j] < height[i] ? height[j]:height[i];
+                sum = real_hight * (j-i);
+                if(sum > max){max = sum;}
+            }
+        }
+        return max;
+        
+    }
+};
+*/
+/*双指针法的优化，因为两边的高度只取决于最低的那个，设置双指针在头尾，所以在进行更新的时候只能够将短的那个指针向内推移
+*这样才有可能得到更高的height，才嫩有可能突破原来的限制，质疑重复这个操作就可以计算max的值。
+*/
+/*
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        auto its = height.begin(),ite = height.end();
+        int max = (ite-its)*(*its > *ite ? *ite : *its),sum;
+        while(ite > its){
+            if( *ite < *its){
+                ite--;
+            }
+            else{
+                its++;
+            }
+            sum = (ite-its)*(*its > *ite ? *ite : *its);
+            if(sum >max)max = sum;
+        }
+        return max;
+    }
+};
+*/
+/*********************************************************************************************************************/
+/*34. 在排序数组中查找元素的第一个和最后一个位置
+*线城市简单的二分查找加上遍历，理论上是log(n) + n
+* 并非严格的log(n)
+*/
+/*
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int low = 0,high = nums.size()-1,mid = (low+high)/2;
+        while(high >= low){
+            mid = (low+high)/2;
+            if(nums[mid] == target){return getRange(mid,nums,target);}
+            if(nums[mid] > target){high = mid-1;continue;}
+            if(nums[mid] < target){low = mid +1;continue;}
+        }
+        vector<int> vec;
+        vec.push_back(-1);
+        vec.push_back(-1);
+        return vec;
+
+    }
+    vector<int> getRange(int index,vector<int> nums,int target){
+        int len = nums.size(),low = index-1,high = index +1;
+        while(low >=0){
+            if(nums[low--] != target){low += 2;break;}
+        }
+        if(low<0)low = 0;
+        while(high < len){
+            if(nums[high++] != target){high -= 2;break;}
+        }
+        if(high >= len)high = len-1;
+        vector<int> vec;
+        vec.push_back(low);
+        vec.push_back(high);
+        return vec;
+
+    }
+};
+*/
+
+/*使用了二分查找来查找左右的边界，优化了时间复杂度，虽然在提交中没有呈现，但是在大数据的情况下效率会有所提升*/
+
+/*
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int>vec;
+        int len = nums.size();
+        int mid = binarySearch(nums,target,0,len-1),low,high,lmid,hmid,slow,shigh;
+        if(mid == -1){
+            vec.push_back(-1);
+            vec.push_back(-1);
+            return vec;
+        }
+        low = 0;
+        high = mid-1;
+        while(high >= low){
+            lmid = binarySearch(nums,target,low,high);
+            if(lmid == -1){slow = high+1;break;}
+            high = lmid - 1;
+        }
+        if(high < low){slow = high +1;}
+        vec.push_back(slow);
+        //cout<<vec[0]<<endl;
+        low = mid +1;
+        high = len-1;
+        //cout<<"low->"<<low<<"high->"<<high<<endl;
+        while(high >= low){
+            hmid = binarySearch(nums,target,low,high);
+            if(hmid == -1){shigh= low-1;break;}
+            low = hmid + 1;
+        }
+        if(high < low){shigh = low -1;}
+        vec.push_back(shigh);
+        //cout<<vec[1]<<endl;
+        return vec;
+
+    }
+    int binarySearch(vector<int> nums,int target,int low,int high){
+        int mid,mid_val;
+        while(high >= low){
+            mid = (low + high)/2;
+            mid_val = nums[mid];
+            if(mid_val == target){return mid;}
+            if(mid_val > target){
+                high = mid-1;
+                continue;
+            }
+            low = mid + 1;
+            continue;
+        }
+        return -1;
+    }
+};
+*/
+/*********************************************************************************************************************/
+
+
+/*********************************************************************************************************************/
+
+/*********************************************************************************************************************/
 /*43. 字符串相乘*/
+/*
 
 class Solution {
 public:
@@ -546,7 +696,7 @@ public:
 }
 
 };
-
+*/
 /*********************************************************************************************************************/
 
 /*********************************************************************************************************************/
