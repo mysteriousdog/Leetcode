@@ -11,11 +11,11 @@
 
 int main(){
 
-  Solution *s = new Solution();
-  string ss = s->intToRoman(1123);
-  cout<<ss<<endl;
-  
 
   
+  Solution *s = new Solution();
+  string str = s->intToRoman(9);
+  cout<<str<<endl;
+
 }
 

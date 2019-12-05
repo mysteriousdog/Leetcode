@@ -438,6 +438,8 @@ public:
 
 */
 /*********************************************************************************************************************/
+
+
 /*11. 盛最多水的容器
 *时间复杂度太高，可以使用双指针法来进行优化
 */
@@ -525,6 +527,7 @@ public:
 */
 
 /*使用了二分查找来查找左右的边界，优化了时间复杂度，虽然在提交中没有呈现，但是在大数据的情况下效率会有所提升*/
+
 /*
 class Solution {
 public:
@@ -581,7 +584,7 @@ public:
 
 /*********************************************************************************************************************/
 /*12. 整数转罗马数字*/
-
+/*
 class Solution {
 public:
     string intToRoman(int num) {
@@ -611,17 +614,241 @@ public:
         }
         ten = num / 10;
         num %= 10;
+        if(ten == 9){str += "XC";}
+        else if(ten == 4){str += "XL";}
+        else if(ten >= 5){
+            str += "L";
+            ten -= 5;
+            for(int j = 0;j<ten;j++){
+                str += "X";
+            }
+        }
+        else if(ten <4){
+            for(int j = 0;j<ten;j++){
+                str += "X";
+            }
+        }
+
+        if(num < 4){
+           for(int j = 0;j<num;j++){
+                str += "I";
+            } 
+        }
+        else if(num == 4){str += "IV";}
+        else if(num >=5 && num <9){
+            str += "V";
+            num -= 5;
+            for(int j = 0;j<num;j++){
+                str += "I";
+            } 
+        }
+        else if(num == 9){
+            str += "IX";
+        }
+
         return str;
     }
 };
 
-
-
-/*********************************************************************************************************************/
+*/
 
 /*********************************************************************************************************************/
 
+/*********************************************************************************************************************/
+/*43. 字符串相乘*/
+/*
+
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if(num1 == "0" || num2 == "0")return "0";
+        int zeros_num = 0;
+        vector<string> q;
+        string m1,m2,m3;
+        for (int i = num1.length()-1; i >=0; i--)
+        {
+           // cout<<"i--"<<i<<endl;
+            q.push_back(mulTow(num2,char(num1[i]),zeros_num++));
+        }
+        while(!q.empty()){
+            if(q.size() == 1){return q.front();}
+            m1 = q.back();
+            q.pop_back();
+            m2 = q.back();
+            q.pop_back();
+            m3 = addTow(m1,m2);
+            //cout<<"m1  "<<m1<<"  m2  "<<m2<<"  m3  "<<m3<<endl;
+            q.push_back(m3);
+        }
+        
+    }
+    string mulTow(string num1,char num2,int zeros_num){
+        if(num1 == "0" || num2 == '0')return "0";
+        int rank = 0,m1,m2 = num2 - '0',sum,k;
+        string final_num = "";
+        for (int i = num1.length()-1; i >=0; i--)
+        {
+            m1 = num1[i] - '0';
+            sum = m1*m2 + rank;
+            rank = sum /10;
+            sum = sum%10;
+            final_num += to_string(sum);
+        }
+        if(rank != 0){final_num += to_string(rank);}
+        final_num = myReverse(final_num);
+        for (size_t i = 0; i < zeros_num; i++)
+        {
+            final_num += "0";
+        }
+        return final_num;
+        
+
+    }
+    string addTow(string num1,string num2){
+        num1 = myReverse(num1);
+        num2 = myReverse(num2);
+        string final_num = "";
+        int len1 = num1.length(),len2 = num2.length(),len3;
+        len3 = len1 > len2? len2:len1;
+        int rank = 0,sum,m1,m2,i=0;
+        for (; i < len3; i++)
+        {
+            m1 = num1[i] - '0';
+            m2 = num2[i] - '0';
+            sum = m1 +m2 +rank;
+            rank = sum /10;
+            sum = sum %10;
+            final_num += to_string(sum);
+        }
+        if(len1 == len2){
+            if (rank == 1)
+            {
+                final_num += "1";
+            }
+            
+        }
+
+        if(len1 > len2){
+            for ( ; i < len1; i++)
+            {
+                m1 = num1[i] - '0' + rank;
+                rank = m1/10;
+                m1 %= 10;
+                final_num += to_string(m1);
+            }
+            
+        }
+        else if(len1 < len2){
+            for ( ; i < len2; i++)
+            {
+                m2 = num2[i] - '0' + rank;
+                rank = m2/10;
+                m2 %= 10;
+                final_num += to_string(m2);
+            }
+            
+        }
+        final_num = myReverse(final_num);
+        return final_num;
+        
+        
+    }
+    string myReverse(string str)
+{
+	string res("");
+	for (int i = str.size() - 1; i >= 0; i--)
+	{
+		res += str[i];
+	}
+	return res;
+}
+
+};
+*/
+/*********************************************************************************************************************/
+/*33. 搜索旋转排序数组*/
+/*
+*1：完成基础二分查找代码
+*2:如果未翻转直接进行二分查找,判断是否反转需要对首位数字进行比较，首大于尾反转，否则未反转
+*3：如果进行了反转，需要根据target所属首尾来进行原数组中最小或者最大值的定位，方便得到两个点
+*3.1：利用二分地方法来进行定位查找点
+*4：在两个点中规定一个数组进行二分查找找到target
+*/
+/*
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size(),low = 0,high = len-1,mid_point;
+        if(len <=0){return -1;}
+        if(nums[high] >= nums[low]){return binarySearch(nums,low,high,target);}
+        mid_point = searchPoint(nums,low,high);
+        if(target >= nums[low]){
+            return binarySearch(nums,low,mid_point,target);
+        }
+        return binarySearch(nums,mid_point+1,high,target);
+    }
+
+    int binarySearch(vector<int> nums,int start,int end,int target){
+        //基础测试完毕
+            int mid,mid_val;
+            
+            while(end >= start){
+                mid = (start + end) / 2;
+                mid_val = nums[mid];
+                if(mid_val == target){return mid;}
+                if(mid_val >target ){
+                    end = mid-1;
+                    continue;
+                }
+                start  = mid +1;
+            }
+            return -1;
+}
+    int searchPoint(vector<int> nums,int low,int high){
+        //基础测试完毕
+        int mid,mid_val,min = nums[low];
+        while(high>=low){
+            mid = (low + high) /2;
+            mid_val = nums[mid];
+            if(mid_val >= min){low = mid+1;
+            if(nums[low] < min){return low-1;}
+            continue;}
+            if(mid_val < min){high = mid-1;
+            if(nums[high] > min){return high;}
+            continue;}
+        }
+        return -1;
+    }
+};
+*/
 
 /*********************************************************************************************************************/
-
+/*46. 全排列
+*首先想到的是使用递归来进行全排列，时间复杂度和空间复杂度都比较高
+*/
+/*
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        auto it = nums.end();
+        vector<vector<int> > vec; 
+        int m;
+        while(!nums.empty()){
+            m = nums.back();
+            nums.pop_back();
+            vector<vector<int> >vv = permute(nums);
+            for(int i =0;i<vv.size();i++){
+                vv[i].push_back(m);
+                vec.push_back(vv[i]);
+            }
+        }
+        return vec;
+    }
+};
+*/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
 /*********************************************************************************************************************/
