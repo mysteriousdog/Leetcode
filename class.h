@@ -525,6 +525,7 @@ public:
 */
 
 /*使用了二分查找来查找左右的边界，优化了时间复杂度，虽然在提交中没有呈现，但是在大数据的情况下效率会有所提升*/
+/*
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -576,8 +577,44 @@ public:
         return -1;
     }
 };
+*/
 
 /*********************************************************************************************************************/
+/*12. 整数转罗马数字*/
+
+class Solution {
+public:
+    string intToRoman(int num) {
+        int thousand,hundred,ten,dan;
+        string str = "";
+        thousand = num/1000;
+        num = num%1000;
+        cout<<thousand<<" "<<num<<endl;
+        for(int i =0;i<thousand;i++){
+            str += "M";
+        }
+        hundred = num/100;
+        num %= 100;
+        if(hundred == 9){str += "CM";}
+        else if(hundred >= 5){
+            str += "D";
+            hundred -= 5;
+            for(int j = 0;j<hundred;j++){
+                str += "C";
+            }
+        }
+        else if(hundred == 4){str += "CD";}
+        else{
+            for(int j = 0;j<hundred;j++){
+                str += "C";
+            }
+        }
+        ten = num / 10;
+        num %= 10;
+        return str;
+    }
+};
+
 
 
 /*********************************************************************************************************************/
