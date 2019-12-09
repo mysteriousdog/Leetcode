@@ -894,6 +894,68 @@ public:
 */
 
 /*********************************************************************************************************************/
+
+/*62. 不同路径
+*尝试用数学方法可以得到O(1)得解
+*/
+/*
+class Solution {
+
+private:
+    int index = 1;
+
+public:
+    int uniquePaths(int m, int n) {
+        int min = m>n?n:m,sum = m+n -2,res = 1,min2;
+        min--;
+        min2=min;
+        int nums[min2];
+        for(int i=0;i<min;i++){
+            nums[i] = i+1;
+        }
+        for(int i =0;i<min;i++){
+            res *= sum--;
+            res = proMin(nums,min2,res);
+        }
+        return res;
+    }
+    int getMinCom(int a,int b){
+        if(a == 1 || b == 1)return 1;
+        int max = a>b?a:b,min,p;
+        if(max == a)min = b;
+        else{min = a;}
+        if(max%min==0)return min;
+        while(min !=0){
+            max %= min;
+            p = min;
+            min = max;
+            max = p;
+        }
+        return max;
+    }
+    int proMin(int nums[],int len,int res){
+        int temp=1,number;
+        for(int i = index;i<len;i++){
+            temp = getMinCom(nums[i],res);
+            res /= temp;
+            nums[i] /= temp;
+        }
+
+        return res;
+    }
+};
+*/
+
+/*接着来尝试一下dp的做法-->
+*dp[i][j] = dp[i-1][j] + dp[i][j-1]
+*/
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        
+    }
+};
+
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
