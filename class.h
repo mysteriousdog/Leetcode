@@ -826,17 +826,26 @@ public:
 /*46. 全排列
 *首先想到的是使用递归来进行全排列，时间复杂度和空间复杂度都比较高
 */
+
 /*
 class Solution {
 public:
-    vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int> > permute(vector<int>& nums) {
         auto it = nums.end();
         vector<vector<int> > vec; 
-        int m;
-        while(!nums.empty()){
-            m = nums.back();
-            nums.pop_back();
-            vector<vector<int> >vv = permute(nums);
+        if(nums.empty()){return vec;}
+        if(nums.size() == 1){
+            vec.push_back(nums);
+            return vec;
+        }
+        int m,k;
+        for(int i=0;i<nums.size();i++){
+            m = nums[i];
+            cout<<"m--->"<<m<<endl;
+            vector<int> v = myCopy(nums,i);
+            showVec(v);
+            vector<vector<int> >vv = permute(v);
+            cout<<"vvlen---->"<<vv.size()<<endl;
             for(int i =0;i<vv.size();i++){
                 vv[i].push_back(m);
                 vec.push_back(vv[i]);
@@ -844,8 +853,23 @@ public:
         }
         return vec;
     }
+    vector<int> myCopy(vector<int> nums,int index){
+        vector<int> vec;
+        for(int i =0;i<nums.size();i++){
+            if(i != index){vec.push_back(nums[i]);}
+        }
+        return vec;
+    }
+    void showVec(vector<int> vec){
+        for(int i =0;i<vec.size();i++){
+            cout<<vec[i]<<"  ";
+        }
+        cout<<endl;
+    }
 };
 */
+
+
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
