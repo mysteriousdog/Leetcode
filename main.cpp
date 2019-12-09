@@ -15,7 +15,7 @@ int main(){
   
   Solution *s = new Solution();
   
-  cout<<s->uniquePaths(1,2)<<endl;
+  cout<<s->uniquePaths(20,20)<<endl;
 }
   
 
