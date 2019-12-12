@@ -979,6 +979,67 @@ public:
 */
 
 /*********************************************************************************************************************/
+/*54. 螺旋矩阵
+*简单的想法，递归，每一次取出最外圈的数据
+*/
+/*
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int> >& matrix) {
+        int l = matrix.size();
+        vector<int> vec;
+        del(matrix,vec,0,l-1);
+        return vec;
+
+    }
+    void del(vector<vector<int> >& matrix, vector<int>& vec,int top,int bottom){
+        if(top > bottom)return;
+        int end = matrix[top].size() - top;
+        if(top >= end){return;}
+        if(end-top == 1){
+            for(int i = top;i<=bottom;i++){
+                vec.push_back(matrix[i][top]);
+            }
+            return;
+        }
+        insertVec(matrix, vec,top++,bottom--);
+        
+        del(matrix,vec,top,bottom);
+    }
+
+    void insertVec(vector<vector<int> >& matrix, vector<int>& vec,int top,int bottom){
+        if(top > bottom){return;}
+        int end = matrix[top].size() - top;
+        if(top == bottom){
+            
+            for(int i=top;i<end;i++){
+                vec.push_back(matrix[top][i]);
+            }
+        }
+        else{
+            for(int i=top;i<end;i++){
+                vec.push_back(matrix[top][i]);
+            }
+            for(int i = top+1;i<=bottom;i++){
+                vec.push_back(matrix[i][end-1]);
+            }
+            for(int i = end-2;i>=top;i--){
+                vec.push_back(matrix[bottom][i]);
+            }
+            for(int i = bottom-1;i>top;i--){
+                vec.push_back(matrix[i][top]);
+            }
+        }
+    }
+
+};
+*/
+
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+
