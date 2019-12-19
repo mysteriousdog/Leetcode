@@ -1036,6 +1036,42 @@ public:
 */
 
 /*********************************************************************************************************************/
+/*55. 跳跃游戏
+*贪心算法 ， 理论上的时间复杂度是O(n)，最快
+*使用DP的话时间复杂度为O(n2)
+*回溯发时间复杂度爆炸,不可取
+*/
+/*
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        if(nums.size()<=0)return false;
+        int low=0,high=0,target = nums.size()-1,k;
+        while(k = jump(nums,low,high,target)){
+            //cout<<low<<"  "<<high<<endl;
+            if(k == 1)return true;
+            if(k == 0)return false;
+            
+        }
+
+    }
+    int jump(vector<int> nums,int &low,int &high,int target){
+        int ls,newhigh = high,newlow = low;
+        for(;low<=high;low++){
+            ls = nums[low] + low;
+            if(ls > newhigh){
+                newhigh = ls;
+                if(newhigh >= target)return 1;
+            }
+        }
+        if(newhigh <= high)return 0;
+        low = high;
+        high = newhigh;
+        return -1;
+    }
+
+};
+*/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
