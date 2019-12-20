@@ -1073,6 +1073,122 @@ public:
 };
 */
 /*********************************************************************************************************************/
+/*18.四数之和
+*首先找出不同的两数的组合和值的和
+*其次根据前两个数的和来使用双指针法使得总的和等于target
+*时间复杂度为O(n2),空间复杂度为O(n)
+*/
+/*
+class Solution {
+public:
+    vector<vector<int> > fourSum(vector<int>& nums, int target) {
+        vector<vector<int> > vec;
+        if(nums.size()<4)return vec;
+        if(nums.size() == 4){
+            if(nums[0] + nums[1] + nums[2] + nums[3] == target){vec.push_back(nums);}
+            return vec;
+        }
+        sort(nums.begin(),nums.end());
+        vector<int> twonums;
+        getTwoNums(twonums,nums);
+        
+        getFourSum(vec,twonums,nums,target);
+        return vec;
+
+    }
+    void getTwoNums(vector<int> &twonums,vector<int>& nums){
+        int num ,n;
+        n = nums.size();
+        if(n<=0)return;
+        for(int i =0;i<n;i++){
+            if(i !=0 && nums[i] == nums[i-1])continue;
+            for(int j = i+1;j<n;j++){
+                if(j == i+1){
+                    num = nums[j];
+                    twonums.push_back(i);
+                    twonums.push_back(j);
+                }
+                else if(nums[j] == num){continue;}
+                else{
+                    twonums.push_back(i);
+                    twonums.push_back(j);
+                    num = nums[j];
+                }
+            }
+        }
+    }
+    void getFourSum(vector<vector<int> > &vec,vector<int> &twonums,vector<int> nums,int target){
+        int num0,num1,sum,index0,index1;
+        for(int i = 0;i<twonums.size();i+=2){
+            if(i+1 >= twonums.size()){break;}
+            index0 = twonums[i];
+            index1 = twonums[i+1];
+            twoPoints(nums,vec,target,index0,index1);
+        }
+    }
+    void twoPoints(vector<int> &nums,vector<vector<int> > &vec,int target,int index0, int index1){
+        int low = index1+1,high = nums.size()-1,sum,count = target - (nums[index0] + nums[index1]);
+        if(low >= high)return;
+        while(low < nums.size() && high >= 0 && high > low){
+            //cout<<high<<"  "<<low<<endl;
+            //getchar();
+            if(nums[low] + nums[high] == count){
+                
+                if(low != index0 && low != index1 && high != index0 && high != index1){
+                    vector<int> v;
+                    v.push_back(nums[index0]);
+                    v.push_back(nums[index1]);
+                    v.push_back(nums[low]);
+                    v.push_back(nums[high]);
+                    vec.push_back(v);
+                    //showVec(v);
+                }
+                if(high >0){
+                    while(high>=0){
+                    if(high == 0)return;
+                    else if(nums[high] == nums[high-1])high--;
+                    else{high--;break;}
+                }
+                }
+                
+
+                else if(low < nums.size()-1){
+                    while(low < nums.size()){
+                    if(low == nums.size()-1)return;
+                    else if(nums[low] == nums[low + 1])low++;
+                    else{low++;break;}
+                }
+                }
+                else{return;}
+            }
+            else if(nums[low] + nums[high] > count){
+                if(high == 0)return;
+                while(high>=0){
+                    if(high == 0)return;
+                    else if(nums[high] == nums[high-1])high--;
+                    else{high--;break;}
+                }
+            }
+            else{
+                if(low == nums.size()-1)return;
+                while(low < nums.size()){
+                    if(low == nums.size()-1)return;
+                    else if(nums[low] == nums[low + 1])low++;
+                    else{low++;break;}
+                }
+            }
+
+        }
+    }
+    void showVec(vector<int> &nums){
+        for(int i = 0;i<nums.size();i++){
+            cout<<nums[i]<<"  ";
+        }
+        cout<<endl;
+    }
+};
+*/
+
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
