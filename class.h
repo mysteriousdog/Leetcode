@@ -1190,6 +1190,52 @@ public:
 */
 
 /*********************************************************************************************************************/
+/*102. 二叉树的层次遍历
+*层序遍历可以考虑一下使用queue，但是现在不能用，而且要考虑到
+分层输出，这样的话可以使用连哥哥容器分别存储一层的节点轮换输出
+*/
+
+class Solution {
+public:
+    vector<vector<int> > levelOrder(TreeNode* root) {
+        vector<vector<int> > vec;
+        if(root == NULL)return vec;
+        vector<TreeNode*> v1;
+        vector<TreeNode*> v2,*p,*q,*t;
+        p = &v1;
+        q = &v2;
+        p->push_back(root);
+        while(!p->empty()){
+            cout<<"size-->"<<p->size()<<endl;
+            vector<int> v;
+            getchar();
+            for(int i =0;i<p->size();i++){
+                TreeNode* temp =(*p)[i] ;
+                if(temp == NULL)continue;
+                v.push_back(temp->val);
+                cout<<"push---->"<<temp->val<<endl;
+                if(temp->left != NULL){
+                    q->push_back(temp->left);
+                }
+                if(temp->right != NULL){
+                    q->push_back(temp->right);
+                }
+                getchar();
+                
+            }
+            if(!v.empty()){
+                vec.push_back(v);
+            }
+            p->clear();
+            t = p;
+            p = q;
+            q = t;
+            
+        }
+        return vec;
+
+    }
+};
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
