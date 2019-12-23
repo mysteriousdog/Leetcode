@@ -6,11 +6,14 @@
 
 
 int main(){
-  int k[] = {3,2,1,5,6,4};
-  vector<int> nums(k,k+6);
-  Solution *s = new Solution();
-  cout<<s->findKthLargest(nums,6)<<endl;
 
+  ListNode *head = Tool::buildList();
+  Tool::showList(head);
+  Solution *s = new Solution();
+  int m,n;
+  cin>>m>>n;
+  head = s->reverseBetween(head,m,n);
+  Tool::showList(head);
   return 0;
 }
   

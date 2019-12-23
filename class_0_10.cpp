@@ -116,5 +116,33 @@ void Solution::showVec(vector<int>& nums){
 }
 */
 /************************************************************************************************************************/
+/*92. 反转链表 II*/
+/*
+ListNode* Solution::reverseBetween(ListNode* head, int m, int n){
+    if(m == n)return head;
+    ListNode *c = head,*p = head,*q = NULL,*pre,*preq = new ListNode(-1);
+    preq->next =c;
+    for(int i =1;i<n;i++){
+        if(i == m-1){preq = p;}
+        if(i == m){pre = p;q = p;q->next = p->next;}
+        if(q){p = q->next;}
+        else{
+            p = p->next;
+        }
+        if(i >= m){
+            q->next = p->next;
+            p->next = pre;
+            pre = p;
+        }
+        
+    }
+    if(preq->next == c){
+        preq->next = p;
+        return preq->next;
+    }
+    preq->next = p;
+    return c;
+}
+*/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
