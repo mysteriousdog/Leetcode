@@ -39,9 +39,82 @@ ListNode* Solution::rotateRight(ListNode* head, int k) {
     
 }
 */
-
 /************************************************************************************************************************/
+/*215. 数组中的第K个最大元素*/
+/*
+int Solution::findKthLargest(vector<int>& nums, int k){
+    buildHeap(nums);
+    return getTopK(nums,k);
+}
+void Solution::buildHeap(vector<int>& nums){
+    int n = nums.size();
+    for(int i = 0;i<n;i++){
+        sortHeap(nums,i,n);
+        showVec(nums);
+    }
+}
+int Solution::getTopK(vector<int>& nums,int k){
+    int num;
+    for(int i =1;i<k;i++){
+        showVec(nums);
+        getchar();
+        nums[0] = nums.back();
+        nums.pop_back();
+        mySort(nums,nums.size());
+    }
+    return nums[0];
+}
+void Solution::mySort(vector<int>& nums,int n){
+    if(n <=1)return;
+    int left,right,bigger,temp;
+    for(int i = 0;i<n;){
+        left = (i+1)*2-1;
+        if(left >= n)return;
+        right = (i+1)*2;
+        if(right <n){
+            bigger = nums[left] >= nums[right] ? left:right;
+        }
+        else{bigger = left;}
+        if(nums[bigger] > nums[i]){
+            temp = nums[bigger];
+            nums[bigger] = nums[i];
+            nums[i] = temp;
+            i = bigger;
+        }
+        else{return;}
+        
+    }
+}
+void Solution::sortHeap(vector<int>& nums,int i,int n){
+    if(i<=0 || nums.empty())return;
+    int temp,par;
+    if((i+1)%2 == 0){
+        par = (i+1)/2-1;
+        if(nums[i] > nums[par]){
+            temp = nums[par];
+            nums[par] = nums[i];
+            nums[i] = temp;
+            sortHeap(nums,par,n);
+        }
+    }
+    else{
+        par = i/2-1;
+        if(nums[i] > nums[par]){
+            temp = nums[par];
+            nums[par] = nums[i];
+            nums[i] = temp;
+            sortHeap(nums,par,n);
+        }
+    }
 
+}
+void Solution::showVec(vector<int>& nums){
+    for(int i = 0;i<nums.size();i++){
+        cout<<nums[i]<<" ";
+    }
+    cout<<endl;
+}
+*/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
