@@ -1,5 +1,4 @@
 #include"class_0_10.h"
-
 /************************************************************************************************************************/
 /*61. 旋转链表*1/
 /*
@@ -165,7 +164,38 @@ int Solution::minPathSum(vector<vector<int> >& grid){
 }
 */
 /************************************************************************************************************************/
+/*31. 下一个排列*5/
+/*
+void Solution::nextPermutation(vector<int>& nums){
+    int n = nums.size(),temp;
+    if(n<=1)return;
+    int index = -1,index2 = -1;
+    for(int i =1;i<n;i++){
+        if(nums[i] > nums[i-1]){index = i-1;index2 = i;}
+        else if(nums[i] >nums[index] && nums[i] < nums[index2]){index2 = i;}
+    }
+    if(index !=-1){
+        temp = nums[index];
+        nums[index] = nums[index2];
+        nums[index2] = temp;
+        if(nums.end() > nums.begin()+1+index){
+            sort(nums.begin()+1+index,nums.end());
+        }
+    }
+    else{
+        int i =0;
+        n--;
+        while(n>i){
+            temp = nums[n];
+            nums[n] = nums[i];
+            nums[i] = temp;
+            i++;
+            n--;
+        }
+    }
 
+}
+*/
 /************************************************************************************************************************/
 
 /************************************************************************************************************************/

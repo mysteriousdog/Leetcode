@@ -29,6 +29,24 @@ class Tool{
         }
         return c->next;
     }
+    static vector<int> buildVec(){
+        cout<<"input the len of the vec: "<<endl;
+        int n,val;
+        cin>>n;
+        vector<int> vec;
+        cout<<"now input the value of the vec: "<<endl;
+        for(int i =0;i<n;i++){
+            cin>>val;
+            vec.push_back(val);
+        }
+        return vec;
+    }
+    static void showVec(vector<int> vec){
+        for(int i = 0;i<vec.size();i++){
+            cout<<vec[i]<<" ";
+        }
+        cout<<endl;
+    }
 };
 
 #endif

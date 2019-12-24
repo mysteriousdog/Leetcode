@@ -7,13 +7,10 @@
 
 int main(){
 
-  ListNode *head = Tool::buildList();
-  Tool::showList(head);
+  vector<int> vec = Tool::buildVec();
   Solution *s = new Solution();
-  int m,n;
-  cin>>m>>n;
-  head = s->reverseBetween(head,m,n);
-  Tool::showList(head);
+  s->nextPermutation(vec);
+  Tool::showVec(vec);
   return 0;
 }
   
