@@ -197,7 +197,54 @@ void Solution::nextPermutation(vector<int>& nums){
 }
 */
 /************************************************************************************************************************/
-
+/*16. 最接近的三数之和6
+*进行了在双指针指上的一些优化
+双指针的low和high选择可以保证是在index之后的
+应为在之前的话会有结果重复
+*/
+/*
+int Solution::threeSumClosest(vector<int>& nums, int target){
+    sort(nums.begin(),nums.end());
+    int tar2,n = nums.size(),temp,tempsum,sum,max=INT_MAX;
+    for(int i =0;i<n-2;i++){
+        tar2 = target - nums[i];
+            temp = nums[i];
+            tempsum = twoPoint(nums,tar2,i+1,n-1);
+            cout<<"tempsum"<<tempsum<<endl;
+            if(abs(temp + tempsum - target) < max){
+                max = abs(temp + tempsum - target);
+                sum = temp + tempsum; 
+                cout<<"sum"<<sum<<endl;
+            }
+        }
+        return sum;
+    }
+int Solution::twoPoint(vector<int>& nums,int target,int low, int high){
+    int n = nums.size(),max = INT_MAX;
+    int sum,result = nums[high] + nums[low];
+    while(high > low){
+        sum = nums[low] + nums[high];
+        if(sum == target){return sum;}
+        if(sum >target){
+            if(sum -target < max){
+                max = sum-target;
+                result = sum;
+            }
+            while((high-1 > low && nums[high] == nums[high-1])){high--;}
+            high--;
+        }
+        else{
+            if(target - sum < max){
+                max = target - sum;
+                result = sum;
+            }
+            while((low + 1 < high && nums[low] == nums[low + 1])){low++;};
+            low++;
+        }
+    }
+    return result;
+}
+*/
 /************************************************************************************************************************/
 
 /************************************************************************************************************************/

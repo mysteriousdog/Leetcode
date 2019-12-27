@@ -7,10 +7,13 @@
 
 int main(){
 
-  vector<int> vec = Tool::buildVec();
   Solution *s = new Solution();
-  s->nextPermutation(vec);
-  Tool::showVec(vec);
+  vector<int> nums = Tool::buildVec();
+  sort(nums.begin(),nums.end());
+  int target;
+  cin>>target;
+  cout<<s->threeSumClosest(nums,target)<<endl;
+
   return 0;
 }
   
