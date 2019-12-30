@@ -251,6 +251,7 @@ int Solution::twoPoint(vector<int>& nums,int target,int low, int high){
 若不符合直接返回失败
 若是符合递归判断下层节点是否符合
 */
+/*
 bool Solution::isValidBST(TreeNode* root){
     if(!root)return true;
     int min,max;
@@ -283,7 +284,40 @@ bool Solution::judge(TreeNode* root,int &min,int &max){
 
 
 }
+*/
+/*中序遍历解决 中止*/
+/*
+bool Solution::isValidBST(TreeNode* root){
+    bool flag = true;
+    int max = root->val;
+    midBl(root,flag,max);
+    return flag;
+}
 
+int Solution::midBl(TreeNode* root, bool &flag,int &max){
+    int val;
+    if(root->left){
+        val = midBl(root->left,flag,max);
+        cout<<"left-->"<<val<<endl;
+        if(!flag)return -1;
+        cout<<"lmax->"<<max<<endl;
+        if(max <= val){flag = false;return -1;}
+    }
+    if(root->right){
+        val = midBl(root->right,flag,max);
+        cout<<"right-->"<<val<<endl;
+        if(!flag)return -1;
+        if(max >= val){flag = false;return -1;}
+        max = val;
+        cout<<"rmax->"<<max<<endl;
+        return val;
+    }
+    cout<<"root->"<<root->val<<endl;
+    return root->val;
+
+}
+
+*/
 /************************************************************************************************************************/
 
 /************************************************************************************************************************/
