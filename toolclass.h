@@ -3,6 +3,7 @@
 
 #include"base.h"
 #include"struct.h"
+#include<queue>
 
 class Tool{
     public:
@@ -46,6 +47,19 @@ class Tool{
             cout<<vec[i]<<" ";
         }
         cout<<endl;
+    }
+    static TreeNode* buildTree(){
+        int num;
+        cout<<"input 233 means null node."<<endl;
+        cin>>num;
+        if(num == 233){
+            return NULL;
+        }
+        TreeNode *root = new TreeNode(num);
+        root->left = buildTree();
+        root->right = buildTree();
+        return root;
+
     }
 };
 

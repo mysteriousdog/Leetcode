@@ -246,6 +246,43 @@ int Solution::twoPoint(vector<int>& nums,int target,int low, int high){
 }
 */
 /************************************************************************************************************************/
+/*98. 验证二叉搜索树
+使用递归的逻辑，首先判断下一层是否符合
+若不符合直接返回失败
+若是符合递归判断下层节点是否符合
+*/
+bool Solution::isValidBST(TreeNode* root){
+    if(!root)return true;
+    int min,max;
+    return judge(root,min,max);
+}
+bool Solution::judge(TreeNode* root,int &min,int &max){
+    bool flag;
+    int val  = root->val;
+    if(!root->left){
+        min = val;
+    }
+    else{
+        int lmin,lmax;
+        flag = judge(root->left,lmin,lmax);
+        if(!flag){return false;}
+        if(val <= lmax)return false;
+        min = lmin;
+    }
+    if(!root->right){
+        max = val;
+    }
+    else{
+        int rmin,rmax;
+        flag = judge(root->right,rmin,rmax);
+        if(!flag)return false;
+        if(val >= rmin)return false;
+        max = rmax;
+    }
+    return true;
+
+
+}
 
 /************************************************************************************************************************/
 
