@@ -8,8 +8,11 @@
 int main(){
 
   Solution *s = new Solution();
-  TreeNode *root = Tool::buildTree();
-  cout<<s->isValidBST(root)<<endl;
+  vector<int> nums = Tool::buildVec();
+  vector<vector<int> > vec = s->subsets(nums);
+  for(int i = 0;i<vec.size();i++){
+    Tool::showVec(vec[i]);
+  }
   return 0;
 }
   

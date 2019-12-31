@@ -246,7 +246,7 @@ int Solution::twoPoint(vector<int>& nums,int target,int low, int high){
 }
 */
 /************************************************************************************************************************/
-/*98. 验证二叉搜索树
+/*98. 验证二叉搜索树7
 使用递归的逻辑，首先判断下一层是否符合
 若不符合直接返回失败
 若是符合递归判断下层节点是否符合
@@ -319,7 +319,35 @@ int Solution::midBl(TreeNode* root, bool &flag,int &max){
 
 */
 /************************************************************************************************************************/
+/*78. 子集8
+*递归的思想
+*/
+/*
+vector<vector<int> > Solution::subsets(vector<int>& nums){
+    return com(nums,0,nums.size());
+}
 
+vector<vector<int> > Solution::com(vector<int>& nums,int index,int n){
+    if(index == n){
+        vector<vector<int> > vec;
+        vector<int> num;
+        vec.push_back(num);
+        return vec;
+    }
+    vector<vector<int> > vec = com(nums,index+1,n);
+    int m = vec.size(),num = nums[index];
+    for(int i = 0;i<m;i++){
+        vector<int> numl;
+        for(int j = 0;j<vec[i].size();j++){
+            numl.push_back(vec[i][j]);
+        }
+        numl.push_back(num);
+        vec.push_back(numl);
+    }
+    return vec;
+    
+}
+*/
 /************************************************************************************************************************/
 
 /************************************************************************************************************************/
