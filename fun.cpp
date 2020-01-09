@@ -46,6 +46,11 @@ void showTree(struct TreeNode* head){
     
 }
 
+bool myCmp(vector<int> v1,vector<int> v2){
+    if(v1[0] > v2[0])return true;
+    if(v1[0] < v2[0])return false;
+    return v1[1] >= v2[1];
+}
 /*********************************************************************************************************************/
 
 

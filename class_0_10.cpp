@@ -1,6 +1,6 @@
 #include"class_0_10.h"
 /************************************************************************************************************************/
-/*61. 旋转链表*1/
+/*61. 旋转链表1*/
 /*
 ListNode* Solution::rotateRight(ListNode* head, int k) {
     if(k == 0)return head;
@@ -39,7 +39,7 @@ ListNode* Solution::rotateRight(ListNode* head, int k) {
 }
 */
 /************************************************************************************************************************/
-/*215. 数组中的第K个最大元素*2/
+/*215. 数组中的第K个最大元素2*/
 /*
 int Solution::findKthLargest(vector<int>& nums, int k){
     buildHeap(nums);
@@ -115,7 +115,7 @@ void Solution::showVec(vector<int>& nums){
 }
 */
 /************************************************************************************************************************/
-/*92. 反转链表 II*3/
+/*92. 反转链表 II3*/
 /*
 ListNode* Solution::reverseBetween(ListNode* head, int m, int n){
     if(m == n)return head;
@@ -144,7 +144,7 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n){
 }
 */
 /************************************************************************************************************************/
-/*64. 最小路径和*4/
+/*64. 最小路径和4*/
 /*
 int Solution::minPathSum(vector<vector<int> >& grid){
     int pathtop,pathleft,len;
@@ -164,7 +164,7 @@ int Solution::minPathSum(vector<vector<int> >& grid){
 }
 */
 /************************************************************************************************************************/
-/*31. 下一个排列*5/
+/*31. 下一个排列5*/
 /*
 void Solution::nextPermutation(vector<int>& nums){
     int n = nums.size(),temp;
@@ -369,4 +369,35 @@ vector<vector<int> > Solution::com(vector<int>& nums,int index,int n){
      }
  }
  */
+/************************************************************************************************************************/
+/*56. 合并区间 10
+*首先实现vector<vector<int> > 中的排序，重写sort算法
+*排序完成以后进行遍历合并
+*/
+/*
+vector<vector<int> > Solution::merge(vector<vector<int> >& intervals){
+    int n = intervals.size();
+    if(n<=1)return intervals;
+    sort(intervals.begin(),intervals.end());
+    vector<vector<int> > vec;
+    for(int i =0;i<n;){
+        int v1,v2,s1,s2,j;
+        s1 = intervals[i][0];
+        s2 = intervals[i][1];
+        for(j = i+1;j<n;j++){
+            v1 = intervals[j][0];
+            v2 = intervals[j][1];
+            if(v1 >= s1 && v2 <= s2)continue;//区间包含
+            if(v1 >= s1 && v1 <= s2 && v2 > s2){s2 = v2;}//相交
+            else{break;}
+        }
+        vector<int> v;
+        v.push_back(s1);
+        v.push_back(s2);
+        vec.push_back(v);
+        i = j;
+    }
+    return vec;
+}
+*/
 /************************************************************************************************************************/
