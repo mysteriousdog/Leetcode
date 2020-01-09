@@ -349,5 +349,24 @@ vector<vector<int> > Solution::com(vector<int>& nums,int index,int n){
 }
 */
 /************************************************************************************************************************/
-
+/*94. 二叉树的中序遍历9
+*递归
+*/
+/*
+ vector<int> Solution::inorderTraversal(TreeNode* root){
+     vector<int> nums;
+     if(!root)return nums;
+     dg(nums,root);
+     return nums;
+ }
+ void Solution::dg(vector<int>& nums,TreeNode* root){
+     if(root->left){
+         dg(nums,root->left);
+     }
+     nums.push_back(root->val);
+     if(root->right){
+         dg(nums,root->right);
+     }
+ }
+ */
 /************************************************************************************************************************/
