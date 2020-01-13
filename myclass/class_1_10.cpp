@@ -99,6 +99,34 @@ int Solution::minimumTotal(vector<vector<int> >& triangle){
 }
 */
 /************************************************************************************************************************/
+/*200. 岛屿数量4
+*遍历，主要思想为对于陆地需要判断上左的相连性
+*项链的话改为相同的类型，不项链的话新建类型，
+*最后倒出新建的类型数量
+*/
+/*
+int Solution::numIslands(vector<vector<char> >& grid){
+    int res = 100;
+    int m = grid.size(),n = grid[0].size();
+    for(int i =0;i<grid.size();i++){
+        for(int j =0;j<grid[i].size();j++){
+            char cc = grid[i][j];
+            if(grid[i][j] == '1'){
+                extend(grid,i,j,n,m,res++);
+            }
+        }
+    }
+    return res-100;
+}
+
+void Solution::extend(vector<vector<char> >& grid,int x,int y,int n,int m,int res){
+    grid[x][y] = res;
+    if(x-1>=0 && grid[x-1][y]== '1'){extend(grid,x-1,y,n,m,res);}
+    if(y+1<n && grid[x][y+1] == '1'){extend(grid,x,y+1,n,m,res);}
+    if(x+1 < m && grid[x+1][y] == '1'){extend(grid,x+1,y,n,m,res);}
+    if(y-1 >=0 && grid[x][y-1] == '1'){extend(grid,x,y-1,n,m,res);}
+}
+*/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
