@@ -7,10 +7,10 @@
 
 int main(){
 
-  ListNode* head = Tool::buildList();
-  Solution *s = new Solution();
-  head = s->deleteDuplicates(head);
-  Tool::showList(head);
-  return 0;
+vector<int> nums = Tool::buildVec();
+Tool::showVec(nums);
+Solution *s = new Solution();
+s->sortColors(nums);
+Tool::showVec(nums);
 }
   

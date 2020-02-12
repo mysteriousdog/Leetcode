@@ -128,5 +128,54 @@ void Solution::extend(vector<vector<char> >& grid,int x,int y,int n,int m,int re
 }
 */
 /************************************************************************************************************************/
+/*75. 颜色分类5
+*双指针法，酱0，2分别置于两边
+*排序的结果效率不高，主要体现在对于1的处理不高效，需要进行优化
+*/
+/*
+void Solution::sortColors(vector<int>& nums){
+    int n = nums.size(),low = 0,high = n-1;
+    while(high > low){
+        int lnum,hnum,k;
+        lnum = nums[low];
+        hnum = nums[high];
+        if(lnum == hnum){
+            switch(lnum){
+                case 0:
+                low++;
+                break;
+                case 1:
+                    k = low;
+                    while(high > low){
+                    low++;
+                    if(nums[low]==1)continue;
+                    int p = nums[low];
+                    nums[low] = 1;
+                    nums[k] = p;
+                    low = k;
+                    break;
+                    }
+                break;
+                case 2:
+                high--;
+                break;
+                default:
+                break;
+            }
+        }
+        else if(hnum > lnum){
+            if(hnum == 2){high--;}
+            else{low++;}
+        }
+        else{
+            int p = hnum;
+            nums[high] = nums[low];
+            nums[low] = p;
+        }
+    }
+
+}
+*/
+
 /************************************************************************************************************************/
 /************************************************************************************************************************/
