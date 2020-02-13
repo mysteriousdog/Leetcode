@@ -207,7 +207,45 @@ int Solution::uniquePathsWithObstacles(vector<vector<int> >& obstacleGrid){
 }
 */
 /************************************************************************************************************************/
+/*29. 两数相除7
+*使用位运算得到一个临界点，取余迭代操作，知道余数小于除数
+*将各个结果相加返回
+*/
 
+int Solution::divide(int dividend, int divisor){
+    int i,sum = 0,pre,qes,c;
+    if(dividend == 0 || divisor ==0)return 0;
+    bool flag = (dividend ^ divisor) >= 0;
+    if(dividend >0)dividend = -dividend;
+    if(divisor>0)divisor = -divisor;
+    while(dividend <= divisor){
+        i= 1;
+        c = dividend;
+        while(1){
+            cout<<"i--"<<i<<endl;
+            pre = dividend,qes = dividend>>1;
+            if(pre<=divisor && qes >= divisor){
+                i--;
+                sum -= 1<<i;
+                break;
+            }
+            i++;
+            dividend = qes;
+        }
+        dividend = c - (divisor<<i);
+        cout<<"--"<<i<<"--"<<c<<"--"<<dividend<<"--"<<sum<<endl;
+
+    }
+    if(flag){
+        cout<<"zheng"<<endl;
+        if(sum == INT_MIN)sum = INT_MAX;
+        else{
+            sum = -sum;
+        }
+    }
+    return sum;
+    
+}
 /************************************************************************************************************************/
 /************************************************************************************************************************/
 /************************************************************************************************************************/

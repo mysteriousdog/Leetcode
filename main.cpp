@@ -7,10 +7,10 @@
 
 int main(){
 
-vector<int> nums = Tool::buildVec();
-Tool::showVec(nums);
+int a,b;
+cin>>a>>b;
 Solution *s = new Solution();
-s->sortColors(nums);
-Tool::showVec(nums);
+cout<<s->divide(a,b);
 }
+
   
