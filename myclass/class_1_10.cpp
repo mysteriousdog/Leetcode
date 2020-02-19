@@ -211,7 +211,7 @@ int Solution::uniquePathsWithObstacles(vector<vector<int> >& obstacleGrid){
 *使用位运算得到一个临界点，取余迭代操作，知道余数小于除数
 *将各个结果相加返回
 */
-
+/*
 int Solution::divide(int dividend, int divisor){
     int i,sum = 0,pre,qes,c;
     if(dividend == 0 || divisor ==0)return 0;
@@ -246,7 +246,44 @@ int Solution::divide(int dividend, int divisor){
     return sum;
     
 }
+*/
 /************************************************************************************************************************/
+/*103. 二叉树的锯齿形层次遍历8
+交替使用队列与栈的思想进行数据罗列
+*/
+/*
+vector<vector<int> > Solution::zigzagLevelOrder(TreeNode* root){
+    vector<vector<int> > vec;
+    if(!root)return vec;
+    queue<TreeNode*> q;
+    stack<TreeNode*> s;
+    q.push(root);
+    while(!q.empty() || !s.empty()){
+        vector<int> v;
+        if(!q.empty()){
+            while(!q.empty()){
+                v.push_back(q.front()->val);
+                if(q.front()->left)
+                s.push(q.front()->left);
+                if(q.front()->right)
+                s.push(q.front()->right);
+                q.pop();
+            }
+            vec.push_back(v);
+        }
+        else{
+            while(!s.empty()){
+                v.push_back(s.top()->val);
+                if(s.top()->left)
+                q.push(s.top()->left);
+                if(s.top()->right)
+                q.push(s.top()->right);
+                s.pop();
+            }
+        }
+    }
+}
+*/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
