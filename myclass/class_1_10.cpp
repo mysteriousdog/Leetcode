@@ -285,7 +285,85 @@ vector<vector<int> > Solution::zigzagLevelOrder(TreeNode* root){
 }
 */
 /************************************************************************************************************************/
+/*543 二叉树的直径*/
+/*
+class Solution {
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(root == NULL)return 0;
+        int lval=0,rval=0;
+        int maxval = 0;
+        lval = getsum(root->left,maxval);
+        cout<<maxval<<endl;
+        rval = getsum(root->right,maxval);
+        
+        cout<<maxval<<endl;
+        return lval + rval>maxval?lval+rval:maxval;
+    }
+    int getsum(TreeNode* root, int& maxval){
+        if(root==NULL)return 0;
+        TreeNode* l = root->left,*r = root->right;
+        //if(l == NULL && r == NULL)return 0;
+        int lv=0,rv=0;
+        if(l!=NULL){
+            lv = getsum(l,maxval);
+        }
+        if(r!=NULL){
+            rv = getsum(r,maxval);
+        }
+        if(lv+rv>maxval)maxval = lv+rv;
+        return lv>=rv?lv+1:rv+1;
+
+    }
+};
+*/
 /************************************************************************************************************************/
+/*面试题 01.05. 一次编辑*/
+/*
+class Solution {
+public:
+    bool oneEditAway(string first, string second) {
+        int fl = first.length(),sl = second.length();
+        if(fl == sl){
+            int sum = 0;
+            for(int i =0;i<fl;i++){
+                if(first[i] != second[i])sum++;
+            }
+            if(sum<=1)return true;
+            return false;
+        }
+        else if(fl - sl == 1){
+            int sum = 0,j=0;
+            for(int i =0;i<sl;i++){
+                if(first[j] != second[i]){
+                    sum++;
+                    if(sum>1)return false;
+                    j++;
+                    i--;
+                }
+                else{j++;}
+            }
+            if(sum <=1)return true;
+            if(sum>1)return false;
+        }
+        else if(fl -sl == -1){
+            int sum = 0,j=0;
+            for(int i =0;i<fl;i++){
+                if(second[j] != first[i]){
+                    sum++;
+                    if(sum>1)return false;
+                    j++;
+                    i--;
+                }
+                else{j++;}
+            }
+            if(sum <=1)return true;
+            if(sum>1)return false;
+        }
+        return false;
+    }
+};
+*/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
 /************************************************************************************************************************/
